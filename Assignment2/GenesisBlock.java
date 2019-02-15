@@ -1,18 +1,17 @@
 public class GenesisBlock {
-  String privateKey; 
+    String privateKey; 
     
     public void getPrivateKey (){
-      int randomValue; 
       privateKey = ""; 
       for (int a = 1; a <= 64 ; a ++) {
-        randomValue = (int)( Math.random () * 16) ; // creates a random value from 0 - 16 
+        int randomValue = (int)( Math.random () * 16) ; // creates a random value from 0 - 16 
         if (randomValue <= 9){
-          privateKey += Integer.toString(randomValue); // converts the random value into a string 
+          privateKey += Integer.toString(randomValue); // converts the random value into a string, adds that value to PrivateKey 
         }
         else {
-          switch (randomValue){
+          switch (randomValue){ //finds the value and converts it into a letter 
             case 10 :
-              privateKey +="A"; 
+              privateKey +="A";
               break; 
             case 11 : 
               privateKey +="B"; 
