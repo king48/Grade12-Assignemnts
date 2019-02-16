@@ -8,7 +8,7 @@ public class GenerateKeys{
    }
     public String getPrivateKey (){
       for (int a = 0; a < 64 ; a ++) {
-        int randomValue = generateRandomValue (0,15) ; // creates a random value from 0 - 15 
+        int randomValue =  generateRandomValue (0,15) ; // creates a random value from 0 - 15 
         if (randomValue <= 9){
           privateKey += Integer.toString(randomValue); // converts the random value into a string, adds that value to PrivateKey 
           valueOfPosition [a] = true; // stores the position of where that number is in the privateKey 
@@ -103,7 +103,7 @@ public class GenerateKeys{
     }
     
     public String getPublicKey () {
-      System.out.println ("  "); 
+      System.out.println ("  hi "); 
       for (int a = 0; a < 64 ; a ++) { 
         if (valueOfPosition [a] == true) {
           publicKey += Character.toString(changeNumber (a)); 
