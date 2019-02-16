@@ -3,9 +3,12 @@ public class GenerateKeys{
    private String publicKey = ""; 
    public boolean [] valueOfPosition = new boolean [64]; 
    
+   public int generateRandomValue (int minValue, int maxValue){
+     return (int) (Math.random ()* maxValue) + minValue ;   
+   }
     public String getPrivateKey (){
       for (int a = 0; a < 64 ; a ++) {
-        int randomValue = (int)( Math.random () * 15) ; // creates a random value from 0 - 15 
+        int randomValue = generateRandomValue (0,15) ; // creates a random value from 0 - 15 
         if (randomValue <= 9){
           privateKey += Integer.toString(randomValue); // converts the random value into a string, adds that value to PrivateKey 
           valueOfPosition [a] = true; // stores the position of where that number is in the privateKey 
