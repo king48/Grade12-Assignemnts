@@ -1,7 +1,7 @@
 public class GenesisBlock {
-  String transactionAmount; 
-  String sender; 
-  String receiver; 
+  String transactionAmount = ""; 
+  String sender = ""; 
+  String receiver=  ""; 
   
   public GenesisBlock (String transactionAmount , String sender, String receiver ) {
     this.transactionAmount = transactionAmount; 
@@ -15,9 +15,20 @@ public class GenesisBlock {
     
     return signature; 
   }
+  
   public void generateHash (){
-    int nonce = 0; 
-    
+
+    String hash = ""; 
+    int g =7; 
+    hash += transactionAmount; 
+    hash += sender; 
+    hash += receiver;
+    int data = 0; 
+     for (int i = 0; i < hash.length(); i ++) 
+   {
+     data = (g * data) + hash.charAt(i); 
+    // System.out.println (hash);
+   }
   }
   
 }
