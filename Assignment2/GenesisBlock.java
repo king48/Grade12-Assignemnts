@@ -3,7 +3,7 @@ public class GenesisBlock {
   String sender = ""; 
   String receiver=  ""; 
   int transactionID = 0; 
-  
+  int blockNumber = 1; 
   public GenesisBlock (int transactionID, String transactionAmount , String sender, String receiver ) {
     this.transactionAmount = transactionAmount; 
     this.sender = sender; 
@@ -38,25 +38,74 @@ public class GenesisBlock {
     data += receiver;
     
     String hash =generateHash(data); 
-    for (int i = 0; i < 64; i ++){
-      char one = hash.charAt (i); 
-      char two = senderPrivateKey.charAt(i); 
-      signature += performAddition (one, two); 
-    }
+    //for (int i = 0; i < 64; i ++){
+     // char one = hash.charAt (i); 
+     // char two = senderPrivateKey.charAt(i); 
+    //  signature += performAddition (one, two); 
+    //}
     System.out.println (data +" = " +hash); 
     return signature; 
   }
   
-  public String generateHash (String data){
-    int hash = 0; 
-    int g =157; // nice prime numebr
-    for (int i = 0; i < data.length(); i ++){
-      hash = (g * hash) + data.charAt(i); 
+  public String proofOfWork () {
+    boolean notFound = true;
+    String thisNewHash = "dfgsdfasdasdasd fsdhjf sdkfhskdf hsdjkf sdjkh "; 
+    int nonce = 0 ; 
+    String data = ""; 
+    data += blockNumber;  
+    data += transactionID;  
+    data += transactionAmount; 
+    data += sender;
+    data += receiver;
+    
+    while (true) {
+      data += nonce; 
+      thisNewHash = generateHash (data);
+      System.out.println (thisNewHash + "nonce " + nonce);
+      if (thisNewHash.charAt(0) == '0'){
+        break; 
+      }
+      else {
+      nonce ++; 
+      if (nonce < 10) 
+        data = data.substring(0,data.length()-1);
+      else if (nonce >= 10 && nonce < 100)
+        data = data.substring(0,data.length()-2);
+      else if (nonce > 99 && nonce <= 999)
+        data = data.substring(0,data.length()-3);
+      
+      }
     }
-    if (hash < 0) { // if our hash is negative 
-      hash *= -1; 
+    return thisNewHash; 
+  }
+  
+    public String generateHash (String data){
+      long primeNum = 17; //Prime number used for hash
+      long hash = 0; // First half of the hash 
+      for (int i = 0; i < data.length (); i++) 
+        hash = ((primeNum * hash) + data.charAt (i));  
+      if (hash < 0)
+        hash *= -1; 
+      String hashed = Long.toString(hash); //First half of the hash, converted to String
+      //Adds the number 7, until the String is 19 digits long, which is creates a 16 char hex number
+      if(hashed.length() < 19) {
+        for (int i = hashed.length(); i < 19; i++) {
+          hashed += 7;
+        }
+        hash = Long.parseLong(hashed); //Parses the String back to it's long form
+      }
+      String hash2 =""; //Second half of the hash
+      int count = 0; //Counter for the while loop
+      //This while loop will change the digits in the base10 hash, moving them back
+      while(count < hashed.length()){
+        if(count == 0)
+          hash2 += hashed.charAt(hashed.length()-1);
+        else{
+          hash2 += hashed.charAt(count - 1);
+        }
+        count++;
+      }
+      long part2 = Long.parseLong(hash2); //Puts second half of hash to long, where it becomes a hex num
+      return (Long.toHexString(hash) + Long.toHexString(part2));
     }
-    String strHash = Integer.toString(hash) ;
-    return "3B6B18EF07306B769B763892019BE081A0F5A62D0D05E919B48A2DF7DED6068D"; 
-  }  
 }
