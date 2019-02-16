@@ -8,27 +8,30 @@ public class GenesisBlock {
     this.sender = sender; 
     this.receiver = receiver; 
   }
-  public String getSignature (){
+  public String getSignature (String senderPrivateKey){
     String signature = "";
-    GenerateKeys keys = new GenerateKeys (); 
-    String privateKey = keys.getPrivateKey ();
+    String data = ""; 
+    data += transactionAmount ; 
+    data += sender;
+    data += receiver;
     
+    String hash =generateHash(data); 
+    //for (int i =0; i < hash.length ();i++){
+    //}
+    System.out.println (  data +" = " +hash); 
     return signature; 
   }
   
-  public void generateHash (){
-
-    String hash = ""; 
-    int g =7; 
-    hash += transactionAmount; 
-    hash += sender; 
-    hash += receiver;
-    int data = 0; 
-     for (int i = 0; i < hash.length(); i ++) 
-   {
-     data = (g * data) + hash.charAt(i); 
-    // System.out.println (hash);
-   }
-  }
-  
+  public String generateHash (String data){
+    int hash = 0; 
+    int g =157; // nice prime numebr
+    for (int i = 0; i < data.length(); i ++){
+      hash = (g * hash) + data.charAt(i); 
+    }
+    if (hash < 0) { // if our hash is negative 
+      hash *= -1; 
+    }
+    String strHash = Integer.toString(hash) ;
+    return strHash; 
+  }  
 }
