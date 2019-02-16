@@ -44,7 +44,7 @@ public class GenerateKeys{
     private char changeNumber (int position){
       char tempNumber = privateKey.charAt (position); 
       switch (tempNumber) {
-        case '0' :
+        case '0' : // goes forward 3 numbers 
           tempNumber = '3'; 
           break;
         case '1' :
@@ -80,7 +80,7 @@ public class GenerateKeys{
     private char changeCharacter (int position){
       char tempChar = privateKey.charAt (position); 
       switch (tempChar) { 
-        case 'A':
+        case 'A': // goes forward 3 letters 
           tempChar = 'D'; 
           break; 
         case 'B' :
@@ -103,7 +103,6 @@ public class GenerateKeys{
     }
     
     public String getPublicKey () {
-      System.out.println ("  hi "); 
       for (int a = 0; a < 64 ; a ++) { 
         if (valueOfPosition [a] == true) {
           publicKey += Character.toString(changeNumber (a)); 
@@ -112,6 +111,8 @@ public class GenerateKeys{
            publicKey += Character.toString(changeCharacter(a)); 
         }
       }
+      System.out.println ("Your Private Key is " + privateKey); 
+      System.out.println ("Your public key is " + publicKey);
       return publicKey; 
     } // end of method 
     
