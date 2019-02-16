@@ -17,22 +17,22 @@ public class GenerateKeys{
           valueOfPosition [a] = false ; 
           switch (randomValue){ //finds the value and converts it into a letter 
             case 10 :
-              privateKey +="A";
+              privateKey +="a";
               break; 
             case 11 : 
-              privateKey +="B"; 
+              privateKey +="b"; 
               break; 
             case 12 :  
-              privateKey +="C"; 
+              privateKey +="c"; 
               break; 
             case 13 :  
-              privateKey +="D"; 
+              privateKey +="d"; 
               break; 
             case 14 :
-              privateKey +="E"; 
+              privateKey +="e"; 
               break;
             case 15 :
-              privateKey +="F"; 
+              privateKey +="f"; 
               break;
           } // ends switch statment 
         } // ends else          
@@ -80,23 +80,23 @@ public class GenerateKeys{
     private char changeCharacter (int position){
       char tempChar = privateKey.charAt (position); 
       switch (tempChar) { 
-        case 'A': // goes forward 3 letters 
-          tempChar = 'D'; 
+        case 'a': // goes forward 3 letters 
+          tempChar = 'd'; 
           break; 
-        case 'B' :
-          tempChar = 'E';
+        case 'b' :
+          tempChar = 'e';
           break;
-        case 'C' :
-          tempChar = 'F'; 
+        case 'c' :
+          tempChar = 'f'; 
           break;
-        case 'D':
-          tempChar = 'A'; 
+        case 'd':
+          tempChar = 'a'; 
           break; 
-        case 'E' :
-          tempChar = 'B';
+        case 'e' :
+          tempChar = 'b';
           break;
-        case 'F' :
-          tempChar = 'C'; 
+        case 'f' :
+          tempChar = 'c'; 
           break;                 
       }
       return tempChar; 
