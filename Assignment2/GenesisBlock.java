@@ -1,8 +1,12 @@
 public class GenesisBlock {
-  String data; 
+  String transactionAmount; 
+  String sender; 
+  String receiver; 
   
-  public GenesisBlock (String data) {
-    this.data = data; 
+  public GenesisBlock (String transactionAmount , String sender, String receiver ) {
+    this.transactionAmount = transactionAmount; 
+    this.sender = sender; 
+    this.receiver = receiver; 
   }
   public String getSignature (){
     String signature = "";
@@ -12,6 +16,7 @@ public class GenesisBlock {
     return signature; 
   }
   public void generateHash (){
+    int nonce = 0; 
     
   }
   
