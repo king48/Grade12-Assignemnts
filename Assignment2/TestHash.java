@@ -10,17 +10,16 @@ public class TestHash {
    if (hash < 0) { // if our hash is negative 
       hash *= -1; 
     }
-    System.out.println ("Final "+hash); 
+
+    System.out.println ("Final "+hash ); 
   }
   public static void main (String args[]){
   TestHash t = new TestHash (); 
-  t.getHash ("The name of me is juan"); 
+  t.getHash ("The name of me is juan fghfg hfgh fgh fg fgh fgfghfghfgh fgh fgh fgh fgh fg hfgh fg"); 
   t.getHash ("The name of me is juan"); 
   t.getHash ("The name of me is juan.f"); 
   t.getHash ("The name of me is juan.123"); 
   t.getHash ("The people"); 
   t.getHash ("The name of me i"); 
-      
-  
   }
 }
