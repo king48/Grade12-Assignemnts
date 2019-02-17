@@ -2,7 +2,12 @@ public class GenerateKeys{
    private String privateKey = ""; 
    private String publicKey = ""; 
    public boolean [] valueOfPosition = new boolean [64]; 
+   private boolean keysGenerated = false; 
    
+   public GenerateKeys (){
+     if (keysGenerated == false) 
+       getPrivateKey (); 
+   }
    public int generateRandomValue (int minValue, int maxValue){
      return (int) (Math.random ()* maxValue) + minValue ;   
    }
@@ -103,16 +108,19 @@ public class GenerateKeys{
     }
     
     public String getPublicKey () {
-      for (int a = 0; a < 64 ; a ++) { 
-        if (valueOfPosition [a] == true) {
-          publicKey += Character.toString(changeNumber (a)); 
+      if (keysGenerated == false) {
+        for (int a = 0; a < 64 ; a ++) { 
+          if (valueOfPosition [a] == true) {
+            publicKey += Character.toString(changeNumber (a)); 
+          }
+          else {
+            publicKey += Character.toString(changeCharacter(a)); 
+          }
         }
-        else {
-           publicKey += Character.toString(changeCharacter(a)); 
-        }
+        //System.out.println ("Your Private Key is " + privateKey); 
+        //System.out.println ("Your Public key is " + publicKey);
+        keysGenerated = true; 
       }
-      System.out.println ("Your Private Key is " + privateKey); 
-      System.out.println ("Your public key is " + publicKey);
       return publicKey; 
     } // end of method 
     
