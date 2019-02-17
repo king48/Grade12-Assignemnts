@@ -42,8 +42,8 @@ public class GenesisBlock {
   }
   */
   public String proofOfWork (String signature) {
-    boolean notFound = true;
-    String thisNewHash = ""; 
+    boolean hashNotFound = true;
+    String newHash = ""; 
     int nonce = 0 ; 
     String data = ""; 
     data += blockNumber;  
@@ -52,9 +52,28 @@ public class GenesisBlock {
     data += sender;
     data += receiver;
     data += signature; 
-    thisNewHash = generateHash (data); 
-   
-    return thisNewHash; 
+    System.out.println (data); 
+   // for (int i = 0; i < 50; i ++){
+    while (hashNotFound){
+      data += nonce;  
+      newHash = generateHash (data);
+      if (newHash.charAt (0) == '0'){
+        System.out.println ("Nonce is "+ nonce + " your new hash is " + newHash); 
+        hashNotFound = false; 
+      }
+      else {
+        if (nonce < 10) 
+          data = data.substring (0, data.length ()-1); 
+        else if (nonce >= 10 && nonce < 100)
+          data = data.substring (0, data.length () - 2);
+        else if (nonce > 99 && nonce <= 999)
+          data = data.substring (0, data.length () - 3);
+        else 
+          data = data.substring (0, data.length ()- 4); 
+        nonce ++;
+      }
+    }
+    return newHash; 
   }
   //This method 
     public String generateHash (String data){
@@ -67,6 +86,7 @@ public class GenesisBlock {
       String signature = getSignature (senderPrivateKey); 
       //boolean varifySignature = getVerification (); 
       String blockHash =  proofOfWork (signature);
+      System.out.println ("Adter the block is mined the hash is " + blockHash); 
       return blockHash; 
     }
       
