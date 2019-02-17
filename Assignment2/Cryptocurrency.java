@@ -8,20 +8,33 @@ This Program is the main class for running other programms
 
 public class Cryptocurrency {
   
-  static int transactionNumber = 2; 
+  static String [] previousHash = new String [3]; 
   
   public static void main (String [] args){
     GenerateKeys juan = new GenerateKeys ();
-    juan.getPrivateKey (); 
     GenerateKeys bill = new GenerateKeys (); 
-    bill.getPrivateKey ();   
+    GenerateKeys jim = new GenerateKeys (); 
+    GenerateKeys josh = new GenerateKeys (); 
+    GenerateKeys jen = new GenerateKeys (); 
+    GenerateKeys jess = new GenerateKeys ();
+    
+    GenesisBlock genBlock = new GenesisBlock(1,"20$", juan.getPublicKey (), bill.getPublicKey ());
+    previousHash [0]= genBlock.generateBlock (juan.getPrivateKey ());
+    System.out.println (" ");
+    BlockTwo secondBlock = new BlockTwo(2,"5000$", juan.getPublicKey (), bill.getPublicKey ());
+    previousHash [1]= secondBlock.generateBlock (juan.getPrivateKey ());
+    System.out.println (" ");
+    BlockThree thirdBlock = new BlockThree(3,"1250$",  jen.getPublicKey (), jess.getPublicKey ());
+    previousHash [2]= thirdBlock.generateBlock (juan.getPrivateKey ());
+    System.out.println (" ");
+  }
+}
+
+
+/*  
     GenerateKeys jim = new GenerateKeys (); 
     jim.getPrivateKey ();   
     GenerateKeys tan = new GenerateKeys (); 
-    tan.getPrivateKey ();
-    GenesisBlock gBlock = new GenesisBlock(transactionNumber,"20$", juan.getPublicKey (), bill.getPublicKey ());
-    gBlock.getSignature (juan.getPrivateKey ());
+    tan.getPrivateKey ();*/
+
    // gBlock.proofOfWork (); // isnt working rn 
-    
-  }
-}
