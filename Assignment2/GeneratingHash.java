@@ -8,6 +8,7 @@ class GeneratingHash {
   public GeneratingHash (String data){
     this.data = data; 
   }
+  
   public static String getHash (byte [] inputBytes){
     String hashValue = ""; 
     try {
@@ -22,12 +23,11 @@ class GeneratingHash {
   }
   public String message () {
     String hash = ""; 
-    try {
-       byte [] dataInBytes = data.getBytes(); 
-       hash = getHash(dataInBytes);
-    }
-    catch (Exception e) {
-    }
+
+    byte [] dataInBytes = data.getBytes(); 
+    hash = getHash(dataInBytes);
+    
+    
     return hash ; 
   } 
 }
