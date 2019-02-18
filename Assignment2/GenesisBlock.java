@@ -4,7 +4,8 @@
 */
 
 public class GenesisBlock {
-   public String transactionAmount = ""; 
+  
+   public double transactionAmount = 0; 
    public String sender = ""; 
    public String receiver=  ""; 
    public  int transactionID = 0; 
@@ -13,7 +14,7 @@ public class GenesisBlock {
   public GenesisBlock (){
     
   }
-  public GenesisBlock (int transactionID, String transactionAmount , String sender, String receiver ) {
+  public GenesisBlock (int transactionID, double transactionAmount, String sender, String receiver) {
     this.transactionID = transactionID;
     this.transactionAmount = transactionAmount; 
     this.sender = sender; 
@@ -42,6 +43,7 @@ public class GenesisBlock {
   public String decrypt (){
     // goes through a decryption function
     // With sender
+    System.out.println ("Decrypt is "+ generateHash (data())); 
     return generateHash (data()); // should be this 
   }
   public String getSignature (String senderPrivateKey){
@@ -56,10 +58,15 @@ public class GenesisBlock {
   public boolean getVerification () { 
     boolean verify = false; 
     // need the data (transaction amount etc), signature and public key
-    String hash = generateHash (data ()); 
-    if (hash == decrypt ())   
-      verify = true; 
-    
+    String hash = generateHash (data ());
+    String hash2 = decrypt (); 
+    System.out.println ("Is " + hash + " = "+ hash2); 
+    for (int a = 0; a < 64; a ++){
+      if (hash.charAt (a) == hash2.charAt (a) && a == 63 ) {  
+        verify = true; 
+      }
+    }
+    System.out.println ("This transaction is " + verify); 
     return verify; 
   }
   
@@ -99,18 +106,17 @@ public class GenesisBlock {
     String hash = genHash.getHash(); 
     return hash;
   }
-    
-    public String generateBlock (String senderPrivateKey) {      
-      String signature = getSignature (senderPrivateKey); 
-      boolean varifySignature = getVerification (); 
-      //if (varifySignature == true){
+  
+  public String generateBlock (String senderPrivateKey) { 
+    String signature = getSignature (senderPrivateKey); 
+    boolean varifySignature = getVerification (); 
+    if (varifySignature == true){
       String blockHash =  proofOfWork (signature);
       System.out.println ("After the block is mined the hash is " + blockHash);
       return blockHash;  
-     // }
-     // else { 
-     //   return "This is not a valid transaction"; 
-     // }
     }
-      
+    else { 
+      return "This is not a valid transaction"; 
+    }
+  }      
 }
