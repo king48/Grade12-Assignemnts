@@ -1,3 +1,5 @@
+import java.security.KeyPair ; 
+
 public class GenerateKeys{
    private String privateKey = ""; 
    private String publicKey = ""; 
@@ -117,8 +119,8 @@ public class GenerateKeys{
             publicKey += Character.toString(changeCharacter(a)); 
           }
         }
-        System.out.println ("Your Private Key is " + privateKey); 
-        System.out.println ("Your Public key is " + publicKey);
+     //   System.out.println ("Your Private Key is " + privateKey); 
+       // System.out.println ("Your Public key is " + publicKey);
         keysGenerated = true; 
       }
       return publicKey; 
