@@ -17,16 +17,17 @@ public class Cryptocurrency {
     GenerateKeys josh = new GenerateKeys (); 
     GenerateKeys jen = new GenerateKeys (); 
     GenerateKeys jess = new GenerateKeys ();
-    
+   
     GenesisBlock genBlock = new GenesisBlock(1,"20$", juan.getPublicKey (), bill.getPublicKey ());
     previousHash [0]= genBlock.generateBlock (juan.getPrivateKey ());
     System.out.println (" ");
-    BlockTwo secondBlock = new BlockTwo(2,"5000$", juan.getPublicKey (), bill.getPublicKey ());
-    previousHash [1]= secondBlock.generateBlock (juan.getPrivateKey ());
-    System.out.println (" ");
-    BlockThree thirdBlock = new BlockThree(3,"1250$",  jen.getPublicKey (), jess.getPublicKey ());
-    previousHash [2]= thirdBlock.generateBlock (juan.getPrivateKey ());
-    System.out.println (" ");
+    // BlockTwo secondBlock = new BlockTwo(2,"5000$", jim.getPublicKey (), josh.getPublicKey (), previousHash [0]);
+    // previousHash [1]= secondBlock.generateBlock (juan.getPrivateKey ());
+    // System.out.println (" ");
+    //  BlockThree thirdBlock = new BlockThree(3,"1250$",  jen.getPublicKey (), jess.getPublicKey (), previousHash [1]);
+    // previousHash [2]= thirdBlock.generateBlock (juan.getPrivateKey ());
+    //  System.out.println (" ");
+    
   }
 }
 
