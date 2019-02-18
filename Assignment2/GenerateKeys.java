@@ -3,12 +3,13 @@ import java.security.KeyPair ;
 public class GenerateKeys{
    private String privateKey = ""; 
    private String publicKey = ""; 
-   public boolean [] valueOfPosition = new boolean [64]; 
+   private boolean [] valueOfPosition = new boolean [64]; 
    private boolean keysGenerated = false; 
-   
+
    public GenerateKeys (){
-     if (keysGenerated == false) 
+     if (keysGenerated == false) {
        getPrivateKey (); 
+     }
    }
    public int generateRandomValue (int minValue, int maxValue){
      return (int) (Math.random ()* maxValue) + minValue ;   
