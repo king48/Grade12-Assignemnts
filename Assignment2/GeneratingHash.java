@@ -15,19 +15,16 @@ class GeneratingHash {
       MessageDigest md = MessageDigest.getInstance("SHA-256");
       md.update (inputBytes); 
       byte [] digestBytes = md.digest ();
-      hashValue = DatatypeConverter.printHexBinary (digestBytes).toLowerCase(); 
+      hashValue = DatatypeConverter.printHexBinary (digestBytes).toLowerCase(); // converts bytes to hexadecimal 
     }
     catch (Exception e) {
     }
     return hashValue; 
   }
-  public String message () {
+  public String getHash () {
     String hash = ""; 
-
     byte [] dataInBytes = data.getBytes(); 
     hash = getHash(dataInBytes);
-    
-    
     return hash ; 
   } 
 }
