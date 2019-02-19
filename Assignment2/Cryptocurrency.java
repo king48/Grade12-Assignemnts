@@ -7,7 +7,6 @@ This Program is the main class for running other programms
 */
 
 public class Cryptocurrency {
-  
   static String [] previousHash = new String [3]; 
   static int [] transactionNumber = new int [4]; 
   static double [] transactionAmount = new double [4];  
@@ -17,7 +16,7 @@ public class Cryptocurrency {
     System.out.println ("Juan is otherwise known as " + senderKey);
     System.out.println ("And Bill is otherwise known as " + receiverKey);
     System.out.println (" "); 
-    transactionAmount [0] = 1034.50; 
+    transactionAmount [0] = 20; 
     transactionNumber [0] = 1;  
   }
   public void secondBlock (String senderKey, String receiverKey){
@@ -25,26 +24,23 @@ public class Cryptocurrency {
     System.out.println ("Jim is otherwise known as " + senderKey);
     System.out.println ("And Josh is otherwise known as " + receiverKey);
     System.out.println (" "); 
-    transactionAmount [1] = 20.123; 
+    transactionAmount [1] = 5000.175; 
     transactionNumber [1] = 2;  
   }
   
   public static void main (String [] args){
     Cryptocurrency crypto = new Cryptocurrency (); 
-    
     GenKeyPairs juan = new GenKeyPairs ();
     GenKeyPairs bill = new GenKeyPairs (); 
     GenKeyPairs jim = new GenKeyPairs (); 
     GenKeyPairs josh = new GenKeyPairs (); 
     GenKeyPairs jen = new GenKeyPairs (); 
     GenKeyPairs jess = new GenKeyPairs ();
-    GenKeyPairs lenn = new GenKeyPairs (); 
-    GenKeyPairs glenn = new GenKeyPairs ();
     
     crypto.firstBlock (juan.getHexaPublicKey (), bill.getHexaPublicKey ());
     GenesisBlock genBlock = new GenesisBlock(transactionNumber [0], transactionAmount [0], juan.getRawPublicKey (), bill.getRawPublicKey (), juan.getHexaPublicKey (), bill.getHexaPublicKey ());
     previousHash [0] = genBlock.generateBlock (juan.getRawPrivateKey ());
-    //System.out.println (" ");
+    System.out.println (" ");
     crypto.secondBlock (jim.getHexaPublicKey (), josh.getHexaPublicKey ());
     BlockTwo secondBlock = new BlockTwo(transactionNumber [1], transactionAmount [0], jim.getRawPublicKey (), josh.getRawPublicKey (), jim.getHexaPublicKey (), josh.getHexaPublicKey (), previousHash [0]);
     previousHash [1] = secondBlock.generateBlock (jim.getRawPrivateKey ());
@@ -55,12 +51,3 @@ public class Cryptocurrency {
     
   }
 }
-
-
-/*  
-    GenerateKeys jim = new GenerateKeys (); 
-    jim.getPrivateKey ();   
-    GenerateKeys tan = new GenerateKeys (); 
-    tan.getPrivateKey ();*/
-
-   // gBlock.proofOfWork (); // isnt working rn 
