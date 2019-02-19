@@ -42,7 +42,7 @@ public class Cryptocurrency {
     previousHash [0] = genBlock.generateBlock (juan.getRawPrivateKey ());
     System.out.println (" ");
     crypto.secondBlock (jim.getHexaPublicKey (), josh.getHexaPublicKey ());
-    BlockTwo secondBlock = new BlockTwo(transactionNumber [1], transactionAmount [0], jim.getRawPublicKey (), josh.getRawPublicKey (), jim.getHexaPublicKey (), josh.getHexaPublicKey (), previousHash [0]);
+    BlockTwo secondBlock = new BlockTwo(transactionNumber [1], transactionAmount [1], jim.getRawPublicKey (), josh.getRawPublicKey (), jim.getHexaPublicKey (), josh.getHexaPublicKey (), previousHash [0]);
     previousHash [1] = secondBlock.generateBlock (jim.getRawPrivateKey ());
     System.out.println (" ");
   // BlockThree thirdBlock = new BlockThree(3,"1250$",  jen.getRawPublicKey (), jess.getRawPublicKey (), previousHash [1]);
