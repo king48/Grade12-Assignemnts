@@ -5,12 +5,12 @@ import java.security.PublicKey;
 import javax.xml.bind.DatatypeConverter; 
 
 public class GenKeyPairs {
-  PublicKey pubKey; 
-  PrivateKey privKey; 
-  byte [] publicKeyBytes; 
-  byte [] privateKeyBytes;
-  String publicKeyHexa; 
-  String privateKeyHexa; 
+  private PublicKey pubKey; 
+  private PrivateKey privKey; 
+  private byte [] publicKeyBytes; 
+  private byte [] privateKeyBytes;
+  private String publicKeyHexa; 
+  private String privateKeyHexa; 
   
   public GenKeyPairs (){
     generateBothKeys ();
