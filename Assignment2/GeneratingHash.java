@@ -1,15 +1,18 @@
+/*
+ 
+ 
+*/
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.xml.bind.DatatypeConverter; 
 
 class GeneratingHash {
   private String data = ""; 
-  
   public GeneratingHash (String data){
     this.data = data; 
   }
-  
-  public static String getHash (byte [] inputBytes){
+  private String getHash (byte [] inputBytes){
     String hashValue = ""; 
     try {
       MessageDigest md = MessageDigest.getInstance("SHA-256");

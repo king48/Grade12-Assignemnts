@@ -2,7 +2,7 @@ public class BlockThree extends GenesisBlock {
   private int transactionsMade;
 
   public BlockThree(int transactionID, double transactionAmount, String sender, String receiver, String previousHash){
-    super(transactionID,transactionAmount,sender,receiver); //This calls superclass constructor
+    super(transactionID,transactionAmount,senderRawKey,receiverRawKey,senderKey,receiverKey); //This calls superclass constructor
     transactionsMade = 0;
   }
   
