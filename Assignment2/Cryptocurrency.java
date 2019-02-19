@@ -32,26 +32,26 @@ public class Cryptocurrency {
   public static void main (String [] args){
     Cryptocurrency crypto = new Cryptocurrency (); 
     
-    GenerateKeys juan = new GenerateKeys ();
-    GenerateKeys bill = new GenerateKeys (); 
-    GenerateKeys jim = new GenerateKeys (); 
-    GenerateKeys josh = new GenerateKeys (); 
-    GenerateKeys jen = new GenerateKeys (); 
-    GenerateKeys jess = new GenerateKeys ();
-    GenerateKeys lenn = new GenerateKeys (); 
-    GenerateKeys glenn = new GenerateKeys ();
+    GenKeyPairs juan = new GenKeyPairs ();
+    GenKeyPairs bill = new GenKeyPairs (); 
+    GenKeyPairs jim = new GenKeyPairs (); 
+    GenKeyPairs josh = new GenKeyPairs (); 
+    GenKeyPairs jen = new GenKeyPairs (); 
+    GenKeyPairs jess = new GenKeyPairs ();
+    GenKeyPairs lenn = new GenKeyPairs (); 
+    GenKeyPairs glenn = new GenKeyPairs ();
     
-    crypto.firstBlock (juan.getPublicKey (), bill.getPublicKey ());
-    GenesisBlock genBlock = new GenesisBlock(transactionNumber [0], transactionAmount [0], juan.getPublicKey (), bill.getPublicKey ());
-    previousHash [0] = genBlock.generateBlock (juan.getPrivateKey ());
+    crypto.firstBlock (juan.getHexaPublicKey (), bill.getHexaPublicKey ());
+    GenesisBlock genBlock = new GenesisBlock(transactionNumber [0], transactionAmount [0], juan.getRawPublicKey (), bill.getRawPublicKey (), juan.getHexaPublicKey (), bill.getHexaPublicKey ());
+    previousHash [0] = genBlock.generateBlock (juan.getRawPrivateKey ());
+    //System.out.println (" ");
+    crypto.secondBlock (jim.getHexaPublicKey (), josh.getHexaPublicKey ());
+    BlockTwo secondBlock = new BlockTwo(transactionNumber [1], transactionAmount [0], jim.getRawPublicKey (), josh.getRawPublicKey (), jim.getHexaPublicKey (), josh.getHexaPublicKey (), previousHash [0]);
+    previousHash [1] = secondBlock.generateBlock (jim.getRawPrivateKey ());
     System.out.println (" ");
-    crypto.secondBlock (jim.getPublicKey (), josh.getPublicKey ());
-    BlockTwo secondBlock = new BlockTwo(transactionNumber [1], transactionAmount [0], jim.getPublicKey (), josh.getPublicKey (), previousHash [0]);
-    previousHash [1] = secondBlock.generateBlock (jim.getPrivateKey ());
-    System.out.println (" ");
-  //  BlockThree thirdBlock = new BlockThree(3,"1250$",  jen.getPublicKey (), jess.getPublicKey (), previousHash [1]);
-   // previousHash [2]= thirdBlock.generateBlock (juan.getPrivateKey ());
-  //  System.out.println (" ");
+  // BlockThree thirdBlock = new BlockThree(3,"1250$",  jen.getRawPublicKey (), jess.getRawPublicKey (), previousHash [1]);
+  // previousHash [2]= thirdBlock.generateBlock (juan.getPrivateKey ());
+  // System.out.println (" ");
     
   }
 }
