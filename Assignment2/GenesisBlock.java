@@ -2,31 +2,39 @@
  
  
 */
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 public class GenesisBlock {
   
    public double transactionAmount = 0; 
-   public String sender = ""; 
-   public String receiver=  ""; 
+   public PublicKey senderRawKey; 
+   public PublicKey receiverRawKey; 
+   public String senderKey = ""; 
+   public String receiverKey = ""; 
    public  int transactionID = 0; 
    public int blockNumber = 1; 
-  
+  Cryptography crypto = new Cryptography ();
   public GenesisBlock (){
     
   }
-  public GenesisBlock (int transactionID, double transactionAmount, String sender, String receiver) {
+  public GenesisBlock (int transactionID, double transactionAmount, PublicKey senderRawKey, PublicKey receiverRawKey, String senderKey, String receiverKey){
     this.transactionID = transactionID;
     this.transactionAmount = transactionAmount; 
-    this.sender = sender; 
-    this.receiver = receiver;
+    this.senderRawKey = senderRawKey; 
+    this.receiverRawKey = receiverRawKey;
+    this.senderKey = senderKey; 
+    this.receiverKey = receiverKey; 
   }
   public String data (){
     String data = ""; // brings together all the data from the transaction 
     data += blockNumber; 
     data += transactionID; 
     data += transactionAmount ; 
-    data += sender;
-    data += receiver;
+    data += senderKey;
+    data += receiverKey;
     return data; 
   }
   public String data  (String extraData){
@@ -35,34 +43,44 @@ public class GenesisBlock {
     data += extraData; // adds extra data
     return data; 
   }
-  public String encrypt (String data, String senderPrivateKey){
-    // goes through a function that I cannot figure out
-    System.out.println ("This is the digital Signature (Encryption) " + data); 
-    return data; // hash shouldnt be the hash tho
+  public String data  (byte [] extraData){
+    String data = ""; // brings together all the data from the transaction PLUS the digital Signature 
+    data += data(); // calls the previous data 
+    data += extraData; // adds extra data
+    return data; 
   }
-  public String decrypt (){
+  public byte [] encrypt (String data, PrivateKey senderPrivateKey){
+     // returned in bytes so get it into String 
+    //System.out.println ("This is the digital Signature (Encryption) " + encryptedMessage); 
+    byte [] encryptedMessage = crypto.encryptMessage (senderPrivateKey, data);
+    System.out.println ("This simple hash ^ Encrypted with the senders private key is " + encryptedMessage + " -- this is now the senders signature." ); 
+    System.out.println ( " " ); 
+    return encryptedMessage; // hash shouldnt be the hash tho
+  }
+  public byte [] decrypt (byte [] signature){
     // goes through a decryption function
     // With sender
-    System.out.println ("Decrypt is "+ generateHash (data())); 
-    return generateHash (data()); // should be this 
+    byte [] decryptedMessageBytes = crypto.decryptMessage(senderRawKey, signature); 
+    return decryptedMessageBytes;
   }
-  public String getSignature (String senderPrivateKey){
-    String signature = "";
+  public byte [] getSignature (PrivateKey senderPrivateKey){
     String hash = generateHash(data ()); // hash all the data from the data method above ^  
     System.out.println ("Hash of simple data without signature :" + hash);
-    signature = encrypt (hash, senderPrivateKey); // takes this hashed data and encrypts it to get the digital signature 
-    System.out.println ("Your signature is " + signature); 
-    return signature; 
+    byte [] byteSignature = encrypt (hash, senderPrivateKey); // takes this hashed data and encrypts it to get the digital signature 
+    return byteSignature; 
   }
   
-  public boolean getVerification () { 
+  public boolean getVerification (byte [] sign) { 
     boolean verify = false; 
     // need the data (transaction amount etc), signature and public key
     String hash = generateHash (data ());
-    String hash2 = decrypt (); 
-    System.out.println ("Is " + hash + " = "+ hash2); 
+    System.out.print (sign +" is decrypted using the senders private key, and you get : "+ decrypt (sign)); 
+    String strDecrypt = new String (decrypt (sign)); 
+    System.out.println (" OR in string : "+ strDecrypt + " Which should be the hash of the data!"); 
+
+    System.out.println ("Is " + hash + " = "+ strDecrypt + " ??"); 
     for (int a = 0; a < 64; a ++){
-      if (hash.charAt (a) == hash2.charAt (a) && a == 63 ) {  
+      if (hash.charAt (a) == strDecrypt.charAt (a) && a == 63 ) {  
         verify = true; 
       }
     }
@@ -70,7 +88,7 @@ public class GenesisBlock {
     return verify; 
   }
   
-  public String proofOfWork (String signature) {
+  public String proofOfWork (byte [] signature) {
     boolean hashNotFound = true;
     String newHash = ""; 
     int nonce = 0 ; 
@@ -107,9 +125,9 @@ public class GenesisBlock {
     return hash;
   }
   
-  public String generateBlock (String senderPrivateKey) { 
-    String signature = getSignature (senderPrivateKey); 
-    boolean varifySignature = getVerification (); 
+  public String generateBlock (PrivateKey senderRawPrivateKey) { 
+    byte [] signature = getSignature (senderRawPrivateKey); 
+    boolean varifySignature = getVerification (signature); 
     if (varifySignature == true){
       String blockHash =  proofOfWork (signature);
       System.out.println ("After the block is mined the hash is " + blockHash);
