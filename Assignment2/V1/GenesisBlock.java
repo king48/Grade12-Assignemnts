@@ -109,7 +109,7 @@ public class GenesisBlock {
    */
   public byte[] encrypt(String data, PrivateKey senderPrivateKey) {
     byte[] encryptedMessage = crypto.encryptMessage(senderPrivateKey, data);
-    System.out.println("This simple hash ^ Encrypted with the senders private key is " + encryptedMessage
+    System.out.println("*This simple hash ^ Encrypted with the senders private key is " + encryptedMessage
         + " -- this is now the senders signature.");
     return encryptedMessage; // hash shouldnt be the hash tho
   }
@@ -133,7 +133,7 @@ public class GenesisBlock {
    */
   public byte[] getSignature(PrivateKey senderPrivateKey) {
     String hash = generateHash(data()); // hash all the data from the data method above ^
-    System.out.println("Hash of simple data without signature :" + hash);
+    System.out.println("*Hash of simple data without signature :" + hash);
     byte[] byteSignature = encrypt(hash, senderPrivateKey); // takes this hashed data and encrypts it to get the digital
     return byteSignature;
   }
@@ -154,10 +154,10 @@ public class GenesisBlock {
         verify = true;
       }
     }
-    System.out.print(sign + " is decrypted using the senders private key, and you get : " + decrypt(sign));
+    System.out.print("*" + sign + " is decrypted using the senders public key, and you get : " + decrypt(sign));
     System.out.println(" OR in string : " + strDecrypt + " Which should be the hash of the data!");
-    System.out.println("Is " + hash + " = " + strDecrypt + " ??");
-    System.out.println("This transaction is " + verify);
+    System.out.println("*Is " + hash + " = " + strDecrypt + " ??");
+    System.out.println("*This transaction is " + verify);
     return verify;
   }
 
@@ -174,13 +174,13 @@ public class GenesisBlock {
     int nonce = 0;
     String data = "";
     data += data(signature);
-    System.out.println("This is hash DATA with signature (No nonce) " + data);
+    System.out.println("*This is hash DATA with signature (No nonce) " + data);
     while (hashNotFound) {
       data += nonce;
       newHash = generateHash(data);
       if (newHash.charAt(0) == '0' && newHash.charAt(1) == 'd' && newHash.charAt(2) == 'c') {
-        System.out.println("Nonce is " + nonce);
-        System.out.println("your new hash with nonce and signature is " + newHash);
+        System.out.println("*Nonce is " + nonce);
+        System.out.println("*Your new hash with nonce and signature is " + newHash);
         hashNotFound = false;
       } else {
         if (nonce < 10) // eliminates the nonce ending
@@ -221,10 +221,10 @@ public class GenesisBlock {
     boolean varifySignature = getVerification(signature);
     if (varifySignature == true) {
       String blockHash = proofOfWork(signature);
-      System.out.println("After the block is mined the hash is " + blockHash);
+      System.out.println("*After the block is mined the hash is " + blockHash);
       return blockHash;
     } else {
-      return "This is not a valid transaction";
+      return "*This is not a valid transaction";
     }
   }
 }

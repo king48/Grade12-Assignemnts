@@ -95,14 +95,14 @@ public class BlockTwo extends GenesisBlock {
     int nonce = 0;
     String data = "";
     data += data(signature);
-    System.out.println("This is hash DATA with signature (No nonce) " + data);
+    System.out.println("*This is hash DATA with signature (No nonce) " + data);
     while (hashNotFound) {
       data += nonce;
       newHash = generateHash(data);
-      if (newHash.charAt(0) == '0' && newHash.charAt(1) == 'c' && newHash.charAt(2) == 'd'
-          && newHash.charAt(3) == 'f') {
-        System.out.println("Nonce is " + nonce);
-        System.out.println("your new hash with nonce and signature is " + newHash);
+      if (newHash.charAt(0) == '0' && newHash.charAt(1) == '0' && newHash.charAt(2) == 'd'
+          && newHash.charAt(3) == 'c') {
+        System.out.println("*Nonce is " + nonce);
+        System.out.println("*Your new hash with nonce and signature is " + newHash);
         hashNotFound = false;
       } else {
         if (nonce < 10) // eliminates the nonce ending
