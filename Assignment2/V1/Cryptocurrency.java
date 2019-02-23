@@ -2,7 +2,7 @@
   Bill Bai, Juan-Diego Castano 
   Ms. Kresteva
   11/02/2019
-  This Class is the main class that will set the transaction amounts, treansaction number
+  This Class is the main class that will set the transaction amounts, transaction number
     and will call other classes in order to create proper blocks -- and in the end a blockchain. 
 */
 
