@@ -50,8 +50,6 @@ public class Cryptocurrency {
     GenKeyPairs bill = new GenKeyPairs();
     GenKeyPairs jim = new GenKeyPairs();
     GenKeyPairs josh = new GenKeyPairs();
-    GenKeyPairs jen = new GenKeyPairs();
-    GenKeyPairs jess = new GenKeyPairs();
 
     crypto.firstBlock(juan.getHexaPublicKey(), bill.getHexaPublicKey());
     GenesisBlock genBlock = new GenesisBlock(transactionNumber[0], transactionAmount[0], juan.getRawPublicKey(),
