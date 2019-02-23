@@ -117,7 +117,6 @@ public class BlockTwo extends GenesisBlock {
           data = data.substring(0, data.length() - 5);
         else
           data = data.substring(0, data.length() - 6);
-
         nonce++; // changes the nonce
       }
     }
